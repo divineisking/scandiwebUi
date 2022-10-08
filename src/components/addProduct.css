@@ -1,0 +1,21 @@
+.formSection{
+    margin:0px 25px 0px 25px ;
+    padding:5px 25px 0px 25px;
+}
+
+.formSection label{
+    margin: 10px;
+    font-weight: 700;
+    font-size: medium;
+}
+
+.formSection input{
+    margin: 10px;
+    border:solid black 2px;
+}
+
+.item{
+    display: flex;
+    justify-items: center;
+    row-gap: 5px;
+}
