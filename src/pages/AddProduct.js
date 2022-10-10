@@ -7,7 +7,7 @@ function AddProduct(){
     const [productAttributes, setProdAttr] = useState({
         product_sku: "",
         product_name: "",
-        product_price: " ",
+        product_price: " "
         
     })
 
