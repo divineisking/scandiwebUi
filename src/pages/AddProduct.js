@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import '../components/addProduct.css'
 
@@ -11,51 +11,37 @@ function AddProduct(){
         
     })
 
-    const [type, setType] = useState('')
+    const [type, setType] = useState('DVD')
 
-    const [prodType, setProdType] = useState()
+    const [newForm, setNewForm] = useState()
     
-    function handleSwitch(e){
-        setType(e.target.value)
-
-       
-        if(e.target.value === 'DVD')
-        {
-            
-             setProdType(()=>{
-                return(
-                    <input placeholder='dvd'/>
-                )
-             })
+    const handleChange = (e) => {
+        const name = e.target.name;
+        const value = e.target.value;
+        setProdAttr((prevProd) => {
+          return {
+            ...prevProd,
+            [name]: value,
+          };
+        });
+      };
+    
+      const getForm = () => {
+        if (type === "DVD") {
+          setNewForm(<input placeholder="DVD"></input>);
         }
-
-        else if(e.target.value === 'Book')
-        {
-            
-             setProdType(()=>{
-                return(
-                    <input placeholder='book'/>
-                )
-             })
+        if (type === "Book") {
+          setNewForm(<input placeholder="Book"></input>);
         }
-
-        if(e.target.value === 'Furniture')
-        {
-            
-             setProdType(()=>{
-                return(
-                    <input placeholder='furniture'/>
-                )
-             })
+        if (type === "Furniture") {
+          setNewForm(<input placeholder="Furniture"></input>);
         }
-
-    }
-
-    console.log(`${type}`)
-
-    function handleChange(){
-
-    };
+      };
+    
+      useEffect(() => {
+        getForm();
+        // eslint-disable-next-line
+      }, [type]);
 
     
 
@@ -109,7 +95,10 @@ return(
                     </div>
                     <div className='specialAtt'>
                         <label htmlFor='productType'>Type Switcher</label>
-                        <select id='productType'name='productType' onChange={handleSwitch} value={type}>
+                        <select id='productType'name='productType' onChange={(e)=>setType(e.target.value)}
+                        value={productAttributes.product_switch}>
+
+                            {/* <option value="switch type">switch type</option> */}
                             <option id='DVD' value='DVD'>
                                 DVD
                             </option>
@@ -123,7 +112,7 @@ return(
                         </select>
                     </div>
                     <div>
-                        {prodType}
+                        {newForm}
                     </div>
                     
                 </form>
