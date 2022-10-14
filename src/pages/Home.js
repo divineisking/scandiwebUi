@@ -1,13 +1,13 @@
 import React from 'react';
 import Header from '../components/Header'
-import ProductCard from '../components/ProductCard';
+import ProductBody from '../components/ProductBody';
 import Footer from '../components/Footer'
 
 function Home(){
     return(
         <React.Fragment>
             <Header/>
-            <ProductCard/>
+            <ProductBody/>
             <Footer/>
         </React.Fragment>
     );

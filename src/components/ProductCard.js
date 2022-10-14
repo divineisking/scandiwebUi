@@ -1,86 +1,28 @@
 import React from 'react';
-import './productCard.css';
+import './productCard.css'
 
-export default function ProductCard(){
-    //const product = data.map((data)=>{})
+export default function productCard({products}){
+    
     return(
-        <React.Fragment>
-            <section className='productBody'>
 
-                <div className='productCard'>
-                    <div>
-                        <input type='checkbox' />
-                    </div>
-                        <div className='productDetail'>
-                            <p>Product_sdk</p>
-                            <p>Product_name</p>
-                            <p>Product_price</p>
-                            <p>Product_Attributes</p>
-                        </div>
+        
+            <React.Fragment>
+            {products.map((product) => (
+            
+                <div className='productCard' key={product.product_id}>
+                <div>
+                    <input type='checkbox' />
                 </div>
-
-                <div className='productCard'>
-                    <div>
-                        <input type='checkbox' />
+                    <div className='productDetail'>
+                        <p>{product.product_sku}</p>
+                        <p>{product.product_name}</p>
+                        <p>{product.product_price}</p>
+                        <p>{product.product_attributes}</p>
                     </div>
-                        <div className='productDetail'>
-                            <p>Product_sdk</p>
-                            <p>Product_name</p>
-                            <p>Product_price</p>
-                            <p>Product_Attributes</p>
-                        </div>
-                </div>
+            </div>
+            )
+            )}
+            </React.Fragment>
+    )
 
-                <div className='productCard'>
-                    <div className='checkbox'>
-                        <input type='checkbox' />
-                    </div>
-                        <div className='productDetail'>
-                            <p>Product_sdk</p>
-                            <p>Product_name</p>
-                            <p>Product_price</p>
-                            <p>Product_Attributes</p>
-                        </div>
-                </div>
-
-                <div className='productCard'>
-                    <div>
-                        <input type='checkbox' />
-                    </div>
-                        <div className='productDetail'>
-                            <p>Product_sdk</p>
-                            <p>Product_name</p>
-                            <p>Product_price</p>
-                            <p>Product_Attributes</p>
-                        </div>
-                </div>
-
-                <div className='productCard'>
-                    <div className='checkbox'>
-                        <input type='checkbox' />
-                    </div>
-                        <div className='productDetail'>
-                            <p>Product_sdk</p>
-                            <p>Product_name</p>
-                            <p>Product_price</p>
-                            <p>Product_Attributes</p>
-                        </div>
-                </div>
-
-                <div className='productCard'>
-                    <div className='checkbox'>
-                        <input type='checkbox' />
-                    </div>
-                        <div className='productDetail'>
-                            <p>Product_sdk</p>
-                            <p>Product_name</p>
-                            <p>Product_price</p>
-                            <p>Product_Attributes</p>
-                        </div>
-                </div>
-
-                
-            </section>
-        </React.Fragment>
-    );
 }

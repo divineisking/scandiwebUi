@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
+import Footer from '../components/Footer'
 import '../components/addProduct.css'
 
 function AddProduct(){
@@ -7,7 +8,8 @@ function AddProduct(){
     const [productAttributes, setProdAttr] = useState({
         product_sku: "",
         product_name: "",
-        product_price: " ",
+        product_price: "",
+        product_attribute: ""
         
     })
 
@@ -28,13 +30,32 @@ function AddProduct(){
     
       const getForm = () => {
         if (type === "DVD") {
-          setNewForm(<input placeholder="DVD"></input>);
+          setNewForm(
+            <div>
+                <label>Size (MB)</label>
+                <input placeholder="DVD" name="product_attribute"></input> <br/>
+                <q><small>Please Provide Size in MB E.G (600MB)</small></q>
+            </div>
+          
+          );
         }
         if (type === "Book") {
-          setNewForm(<input placeholder="Book"></input>);
+          setNewForm(
+            <div>
+                <label>Weight (KG)</label>
+                 <input placeholder="Book" name="product_attribute" ></input> <br/>
+                 <q><small>Please Provide weight in KG E.G (57KG)</small></q>
+            </div>
+         );
         }
         if (type === "Furniture") {
-          setNewForm(<input placeholder="Furniture"></input>);
+          setNewForm(
+            <div>
+                <label>Height (CM)</label>
+                <input placeholder="Furniture" name="product_attribute" ></input> <br/>
+                <q><small>Please Provide dimensions in HxWxL format E.G (4x34x15cm)</small></q>
+            </div>
+          );
         }
       };
     
@@ -45,6 +66,14 @@ function AddProduct(){
 
     
 
+      //handleSubmit 
+      function handleSubmit(e){
+        e.preventDefault()
+
+        console.log(productAttributes)
+
+
+      }
     /*function handleSwitch(event){
 
         
@@ -62,7 +91,7 @@ return(
                 </div>
                 <div className='buttons'>
                 <div>
-                        <button>
+                        <button type='submit' onClick={handleSubmit}>
                             Save
                         </button>
                     </div>
@@ -117,6 +146,7 @@ return(
                     
                 </form>
             </section>
+            <Footer/>
         </React.Fragment>
 )
 
