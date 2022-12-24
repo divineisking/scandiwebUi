@@ -1,28 +1,49 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { FaCheckSquare } from 'react-icons/fa'
 import './productCard.css'
 
-export default function productCard({products}){
-    
-    return(
+export default function ProductCard({ isHeld, product_id,
+    product_price, product_name, product_sku, product_attributes, getProdID,rmProdID }) {
 
-        
-            <React.Fragment>
-            {products.map((product) => (
-            
-                <div className='productCard' key={product.product_id}>
-                <div>
-                    <input type='checkbox' />
+    const [checkInp, setCheckInp] = useState(isHeld)
+    const [newId, setNewId] = useState()
+
+    const handleCheck = () => {
+        setCheckInp(!checkInp)
+
+        setNewId(product_id)
+    }
+
+
+    const getID = () =>{
+        if (checkInp !== false){
+           getProdID(newId)
+        }
+        else{
+            rmProdID(newId)
+        }
+    }
+
+    useEffect(()=>{
+        getID()
+    }, [checkInp])
+
+    return (
+
+        <React.Fragment>
+            <div className='productCard'>
+                <div className={"checkbox"} onClick={async () => {
+                    handleCheck()
+                }}>
+                    {checkInp ? <FaCheckSquare size={"15px"} /> : null}</div>
+                <div className='productDetail'>
+                    <p>{product_sku}</p>
+                    <p>{product_name}</p>
+                    <p>{product_price}.00$</p>
+                    <p>{product_attributes}</p>
                 </div>
-                    <div className='productDetail'>
-                        <p>{product.product_sku}</p>
-                        <p>{product.product_name}</p>
-                        <p>{product.product_price}</p>
-                        <p>{product.product_attributes}</p>
-                    </div>
             </div>
-            )
-            )}
-            </React.Fragment>
+        </React.Fragment>
     )
 
 }

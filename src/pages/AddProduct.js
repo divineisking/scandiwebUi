@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer'
 import '../components/addProduct.css'
+import axios from 'axios';
 
 function AddProduct(){
 
@@ -31,30 +32,29 @@ function AddProduct(){
       const getForm = () => {
         if (type === "DVD") {
           setNewForm(
-            <div>
                 <label>Size (MB)</label>
-                <input placeholder="DVD" name="product_attribute"></input> <br/>
-                <q><small>Please Provide Size in MB E.G (600MB)</small></q>
-            </div>
+                /* <br/>
+                <q><small>Please Provide Size in MB E.G (600MB)</small></q> */
+            
           
           );
         }
         if (type === "Book") {
           setNewForm(
-            <div>
+            
                 <label>Weight (KG)</label>
-                 <input placeholder="Book" name="product_attribute" ></input> <br/>
-                 <q><small>Please Provide weight in KG E.G (57KG)</small></q>
-            </div>
+                 /* <br/>
+                 <q><small>Please Provide weight in KG E.G (57KG)</small></q> */
+
          );
         }
         if (type === "Furniture") {
           setNewForm(
-            <div>
+            
                 <label>Height (CM)</label>
-                <input placeholder="Furniture" name="product_attribute" ></input> <br/>
-                <q><small>Please Provide dimensions in HxWxL format E.G (4x34x15cm)</small></q>
-            </div>
+                 /* <br/>
+                <q><small>Please Provide dimensions in HxWxL format E.G (4x34x15cm)</small></q> */
+            
           );
         }
       };
@@ -67,21 +67,44 @@ function AddProduct(){
     
 
       //handleSubmit 
-      function handleSubmit(e){
-        e.preventDefault()
+ function handleSave(){
+ 
+    if(productAttributes.product_sku === ""){
+        console.log('product sku cant be empty')
+    }
 
-        console.log(productAttributes)
+    else if(productAttributes.product_name === ""){
+        console.log('product name cant be empty')
+    }
 
+    else if(productAttributes.product_price === ""){
+        console.log('product price cant be empty')
+    }
+    else if(productAttributes.product_attribute === ""){
+        console.log('product attribute cant be empty')
+    }
 
+    else{
+        const instance = axios.create();
+
+        instance.defaults.headers.post['Content-Type'] = 'application/json';
+
+        instance.post('http://localhost/SCANDIWEB_PHPTEST/includes/add.php', {
+           productAttributes
+          }).then(function (response) {
+            if (response.status === 204) {
+                alert(`sku ${productAttributes.product_sku} already exist`);
+                //throw new Error(`Error! status: ${response.status}`);
+              }
+            console.log(response)
+          })
+        //   .catch(function (error) {
+        //     console.log(error)
+        //   })
+
+          
+        }
       }
-    /*function handleSwitch(event){
-
-        
-        setType(event.target.value)
-
-    console.log(type)
-
-    }*/
 
 return(
     <React.Fragment>
@@ -91,7 +114,7 @@ return(
                 </div>
                 <div className='buttons'>
                 <div>
-                        <button type='submit' onClick={handleSubmit}>
+                        <button type='submit' name='submit' onClick={()=>{handleSave(productAttributes)}}>
                             Save
                         </button>
                     </div>
@@ -142,8 +165,8 @@ return(
                     </div>
                     <div>
                         {newForm}
+                        <input placeholder={type} name="product_attribute" value={productAttributes.product_attribute} onChange={handleChange}></input>
                     </div>
-                    
                 </form>
             </section>
             <Footer/>

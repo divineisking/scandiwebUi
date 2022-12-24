@@ -1,13 +1,25 @@
-import React from 'react';
-import Header from '../components/Header'
+import React , {useEffect, useState} from 'react';
 import ProductBody from '../components/ProductBody';
 import Footer from '../components/Footer'
 
 function Home(){
+    const [products,setProducts] = useState(null)
+    const fetchProducts = async () => {
+        const response = await fetch('http://localhost/SCANDIWEB_PHPTEST/includes/view.php');
+        const data = await response.json();
+        const results = data.map(myData=>{
+            return {...myData, isHeld: false }
+        })
+        setProducts(results)
+    };
+
+    useEffect(()=>{
+        fetchProducts()
+    }, [])
+    
     return(
         <React.Fragment>
-            <Header/>
-            <ProductBody/>
+            <ProductBody products={products} />
             <Footer/>
         </React.Fragment>
     );
