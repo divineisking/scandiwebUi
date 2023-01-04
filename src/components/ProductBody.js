@@ -10,40 +10,22 @@ export default function ProductBody({ products }) {
     const [iD, setId] = useState([])
 
    function getProdID(prodID) {
-        //const ID = [prodID]
-        //ID.push(prodID)
         setId((prevId) => {
             return (
                 [...prevId, prodID]
             )
         })
-
-        
-        
     }
 
     function rmProdID(prodID){
         iD.pop(prodID)
     }
 
-    
+
 
     function handleMassDel() {
-        // //if (products.isHeld !== true)
-        // {
-        //     //const array = []
-        //     // array.push(products.product_id)
 
-        //     console.log(products.product_id)
-        // }
-
-        // fetch('http://localhost/SCANDIWEB_PHPTEST/delete.php',{
-        //     method:'post',
-        //     headers: {"Content-Type": "application/json"},
-        //     body: JSON.stringify(iD)
-        // }).then(res=> console.log(res)).catch(err=> console.log(err)).then(console.log(JSON.stringify(iD)))
-
-        axios.post('http://localhost/SCANDIWEB_PHPTEST/includes/delete.php', {
+        axios.post('https://divinennodim.000webhostapp.com/delete.php', {
             iD
           }).then(function (response) {
             console.log(response);
@@ -52,9 +34,7 @@ export default function ProductBody({ products }) {
             console.log(error);
           });
 
-          window.location.reload(false);
-
-        console.log(iD)
+          //window.location.reload(false);
 
 
     }

@@ -4,8 +4,10 @@ import Footer from '../components/Footer'
 
 function Home(){
     const [products,setProducts] = useState(null)
+
+    //fetch data from BE
     const fetchProducts = async () => {
-        const response = await fetch('http://localhost/SCANDIWEB_PHPTEST/includes/view.php');
+        const response = await fetch('https://divinennodim.000webhostapp.com/view.php');
         const data = await response.json();
         const results = data.map(myData=>{
             return {...myData, isHeld: false }
@@ -16,10 +18,10 @@ function Home(){
     useEffect(()=>{
         fetchProducts()
     }, [])
-    
+
     return(
         <React.Fragment>
-            <ProductBody products={products} />
+            <ProductBody products={products}/>
             <Footer/>
         </React.Fragment>
     );
