@@ -26,6 +26,7 @@ export default function ProductCard({ isHeld, product_id,
 
     useEffect(()=>{
         getID()
+        // eslint-disable-next-line
     }, [checkInp])
 
     return (
