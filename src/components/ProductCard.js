@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FaCheckSquare } from 'react-icons/fa'
-import './productCard.css'
+import './productcard.css'
 
 export default function ProductCard({ isHeld, product_id,
     product_price, product_name, product_sku, product_attributes, getProdID,rmProdID }) {
