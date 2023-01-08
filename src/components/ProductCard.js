@@ -36,7 +36,8 @@ export default function ProductCard({ isHeld, product_id,
                 <div className={"delete-checkbox checkbox"} id='delete-checkbox' onClick={async () => {
                     handleCheck()
                 }}>
-                    {checkInp ? <FaCheckSquare size={"15px"} /> : null}</div>
+                    {checkInp ? <FaCheckSquare size={"15px"} /> : null}
+                    </div>
                 <div className='productDetail'>
                     <p>{product_sku}</p>
                     <p>{product_name}</p>
