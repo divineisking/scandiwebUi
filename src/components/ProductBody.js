@@ -25,7 +25,7 @@ export default function ProductBody({ products }) {
 
     function handleMassDel() {
 
-        axios.post('https://divinennodim.000webhostapp.com/delete.php', {
+        axios.post('https://divinennodim.000webhostapp.com/view.php', {
             iD
           }).then(function (response) {
             console.log(response);

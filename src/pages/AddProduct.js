@@ -99,9 +99,10 @@ function AddProduct(){
         //   })
 
         fetch('https://divinennodim.000webhostapp.com/add.php', {
-        method: 'POST', // or 'PUT'
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
   },
         body: JSON.stringify(productAttributes),
         })
@@ -142,7 +143,7 @@ return(
             </header>
             <hr />
             <section className='formSection'>
-                <form>
+                <form id='product_form'>
                     <div className='attributes'>
                         <div className='item'>
                             <label htmlFor="product_sku">SKU</label>
