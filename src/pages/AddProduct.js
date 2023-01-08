@@ -147,7 +147,7 @@ return(
                     <div className='attributes'>
                         <div className='item'>
                             <label htmlFor="product_sku">SKU</label>
-                            <input type="text" name="product_sku" id="sdk" placeholder='Enter Product SKU' value={productAttributes.product_sku} onChange={handleChange}/>
+                            <input type="text" name="product_sku" id="sku" placeholder='Enter Product SKU' value={productAttributes.product_sku} onChange={handleChange}/>
                         </div>
                         <div>
                             <label htmlFor="product_name">Name</label>
