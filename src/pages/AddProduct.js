@@ -151,11 +151,11 @@ return(
                         </div>
                         <div>
                             <label htmlFor="product_name">Name</label>
-                            <input type="text" name="product_name" id="" placeholder='Enter Product Name' value={productAttributes.product_name} onChange={handleChange} />
+                            <input type="text" name="product_name" id="name" placeholder='Enter Product Name' value={productAttributes.product_name} onChange={handleChange} />
                         </div>
                         <div>
                             <label htmlFor="product_price">Price</label>
-                            <input type="text" name="product_price" id="" placeholder='Enter Product Price' value={productAttributes.product_price} onChange={handleChange}/>
+                            <input type="text" name="product_price" id="price" placeholder='Enter Product Price' value={productAttributes.product_price} onChange={handleChange}/>
                         </div>
                     </div>
                     <div className='specialAtt'>
@@ -178,7 +178,7 @@ return(
                     </div>
                     <div>
                         {newForm}
-                        <input placeholder={type} name="product_attribute" value={productAttributes.product_attribute} onChange={handleChange}></input>
+                        <input placeholder={type} name="product_attribute" value={productAttributes.product_attribute} onChange={handleChange} id='size length weight width height'></input>
                     </div>
                 </form>
             </section>
