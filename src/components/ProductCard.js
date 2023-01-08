@@ -33,7 +33,7 @@ export default function ProductCard({ isHeld, product_id,
 
         <React.Fragment>
             <div className='productCard'>
-                <div className={"checkbox"} onClick={async () => {
+                <div className={"checkbox"} id='delete-checkbox' onClick={async () => {
                     handleCheck()
                 }}>
                     {checkInp ? <FaCheckSquare size={"15px"} /> : null}</div>
