@@ -16,6 +16,8 @@ function AddProduct(){
 
     const [type, setType] = useState('DVD')
 
+    const [id, setId] = useState('size')
+
     const [newForm, setNewForm] = useState()
 
     const handleChange = (e) => {
@@ -59,8 +61,24 @@ function AddProduct(){
         }
       };
 
+    const setID = () =>{
+        if(type === 'DVD'){
+            setId('size')
+        };
+
+        if(type === 'Book'){
+            setId('weight')
+        };
+
+        if(type === 'Furniture'){
+            setId('height')
+        };
+
+    }
+
     useEffect(() => {
         getForm();
+        setID();
         // eslint-disable-next-line
       }, [type]);
 
@@ -70,18 +88,18 @@ function AddProduct(){
  function handleSave(){
 
     if(productAttributes.product_sku === ""){
-        console.log('product sku cant be empty')
+        alert('product sku cant be empty')
     }
 
     else if(productAttributes.product_name === ""){
-        console.log('product name cant be empty')
+        alert('product name cant be empty')
     }
 
     else if(productAttributes.product_price === ""){
-        console.log('product price cant be empty')
+        alert('product price cant be empty')
     }
     else if(productAttributes.product_attribute === ""){
-        console.log('product attribute cant be empty')
+        alert('product attribute cant be empty')
     }
 
     else{
@@ -178,7 +196,7 @@ return(
                     </div>
                     <div>
                         {newForm}
-                        <input placeholder={type} name="product_attribute" value={productAttributes.product_attribute} onChange={handleChange} id='size length weight width height'></input>
+                        <input placeholder={type} name="product_attribute" value={productAttributes.product_attribute} onChange={handleChange} id={id}></input>
                     </div>
                 </form>
             </section>
