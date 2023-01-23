@@ -36,8 +36,6 @@ export default function AddProduct() {
                 [name]: value,
             };
         });
-
-        console.log('fired')
     };
 
     const dynamicForm = () => {
@@ -68,7 +66,6 @@ export default function AddProduct() {
                 </React.Fragment>
 
             );
-            console.log('fired')
         }
         if (type === "Furniture") {
             setNewForm(
@@ -91,7 +88,6 @@ export default function AddProduct() {
                 </React.Fragment>
 
             );
-            console.log('fired')
         }
     };
 
@@ -99,7 +95,7 @@ export default function AddProduct() {
         dynamicForm();
         //setID();
         // eslint-disable-next-line
-    }, [type, specialAtt, specialAtt.length]);
+    }, [type, specialAtt.lengthi, specialAtt.size, specialAtt.height, ]);
 
     //handleSubmit
     function handleSave() {
