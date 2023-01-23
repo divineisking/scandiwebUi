@@ -54,7 +54,7 @@ export default function ProductBody({ products }) {
                         </button>
                     </div>
                     <div>
-                        <button id='delete-product-bin' onClick={handleMassDel}>
+                        <button className=''id='delete-product-bin' onClick={handleMassDel}>
                             MASS DELETE
                         </button>
                     </div>
