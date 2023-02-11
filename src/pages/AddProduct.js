@@ -8,24 +8,22 @@ export default function AddProduct() {
 
     const [type, setType] = useState('DVD')
 
-    const [specialAtt, setSpecialAtt] = useState({
-        size:"",
-        weight:"",
-        height:"",
-        width:"",
-        lengthi:""
-    })
-
-    const [newForm, setNewForm] = useState('')
+    const [newForm, setNewForm] = useState()
 
     const [productAttributes, setProdAttr] = useState({
         product_sku: "",
         product_name: "",
         product_price: "",
-        product_attribute: "",
+        product_attribute: ''
     })
 
-    //const [id, setId] = useState('size')
+    const [specialAtt, setSpecialAtt] = useState({
+        size: "",
+        weight: "",
+        height: "",
+        width: "",
+        lengthi: ""
+    })
 
     const handleChange = (e) => {
         const name = e.target.name;
@@ -38,29 +36,38 @@ export default function AddProduct() {
         });
     };
 
+    const handleChange2 = (e) => {
+        const name = e.target.name;
+        const value = e.target.value;
+        setSpecialAtt((prevProd) => {
+            return {
+                ...prevProd,
+                [name]: value,
+            };
+        });
+    };
+
     const dynamicForm = () => {
         if (type === "DVD") {
             setNewForm(
                 <React.Fragment>
                     <label>Size (MB)</label>
-                    <input type='text' placeholder="Size" name="size" value=
-                    {specialAtt.size} id='size' onChange={(e) => setSpecialAtt(e.target.value)}/>
+                    <input type='number' placeholder="Size" name="size" value=
+                    {specialAtt.size} id='size' onChange={handleChange2}/>
                     <br />
                     <q><small>Please Provide Size in MB E.G (600MB)</small></q>
                 </React.Fragment>
 
 
             );
-
-            console.log('fired')
         }
         if (type === "Book") {
             setNewForm(
 
                 <React.Fragment>
                     <label>Weight (KG)</label>
-                    <input type='text' placeholder="Weight" name="weight" value=
-                    {specialAtt.weight} id='weight' onChange={(e) => setSpecialAtt(e.target.value)}/>
+                    <input type='number' placeholder="Weight" name="weight" value=
+                    {specialAtt.weight} id='weight' onChange={handleChange2}/>
                     <br />
                     <q><small>Please Provide Weight in KG E.G (60KG)</small></q>
                 </React.Fragment>
@@ -72,17 +79,17 @@ export default function AddProduct() {
 
                 <React.Fragment>
                     <label>Height (CM)</label>
-                    <input type='text' placeholder='Height' name="height" value={specialAtt.height} id='height' onChange={(e) => setSpecialAtt(e.target.value)}/>
+                    <input type='number' placeholder='Height' name="height" value={specialAtt.height} id='height' onChange={handleChange2}/>
                     <br/>
                     <q><small>Please Provide Height in CM E.G (60CM)</small></q>
                     <br/>
                     <label>Width (CM)</label>
-                    <input type='text' placeholder='Width' name="width" value={specialAtt.width} id='width' onChange={(e) => setSpecialAtt(e.target.value)}/>
+                    <input type='number' placeholder='Width' name="width" value={specialAtt.width} id='width' onChange={handleChange2}/>
                     <br/>
                     <q><small>Please Provide Width in CM E.G (60CM)</small></q>
                     <br/>
                     <label>length (CM)</label>
-                    <input type='text' placeholder='Length' name="length" value={specialAtt.lengthi} id='length' onChange={(e) => setSpecialAtt(e.target.value)}/>
+                    <input type='number' placeholder='Length' name="lengthi" value={specialAtt.lengthi} id='length' onChange={handleChange2}/>
                     <br/>
                     <q><small>Please Provide length in CM E.G (60CM)</small></q>
                 </React.Fragment>
@@ -91,62 +98,81 @@ export default function AddProduct() {
         }
     };
 
+    const assignData = () => {
+          if (type === 'DVD'){
+            let data = specialAtt.size
+            productAttributes.product_attribute = data+'MB'
+           }
+           if (type === 'Book'){
+            let data = specialAtt.weight
+            productAttributes.product_attribute = data+'KG'
+           }
+           if (type === 'Furniture'){
+            let data = specialAtt.height+'x'+specialAtt.lengthi+'x'+specialAtt.width
+            productAttributes.product_attribute = data+'CM'
+           }
+
+    }
+
+
     useEffect(() => {
         dynamicForm();
+        assignData();
         //setID();
         // eslint-disable-next-line
-    }, [type, specialAtt.lengthi, specialAtt.size, specialAtt.height, ]);
+    }, [type, specialAtt]);
 
     //handleSubmit
     function handleSave() {
 
-        if (productAttributes.product_sku === "") {
-            alert('product sku cant be empty')
-        }
+        // assignData()
 
-        else if (productAttributes.product_name === "") {
-            alert('product name cant be empty')
-        }
+        console.log(productAttributes)
 
-        else if (productAttributes.product_price === "") {
-            alert('product price cant be empty')
-        }
-        else if (productAttributes.product_attribute === "") {
-            alert('product attribute cant be empty')
-        }
+        // if (productAttributes.product_sku === "") {
+        //     alert('product sku cant be empty')
+        // }
 
-        else {
-            // const instance = axios.create();
+        // else if (productAttributes.product_name === "") {
+        //     alert('product name cant be empty')
+        // }
 
-            // instance.defaults.headers.post['Content-Type'] = 'application/json';
+        // else if (productAttributes.product_price === "") {
+        //     alert('product price cant be empty')
+        // }
 
-            // instance.post('https://divinennodim.000webhostapp.com/add.php', {
-            //    productAttributes
-            //   }).then(function (response) {
-            //     if (response.status === 204) {
-            //         alert(`sku ${productAttributes.product_sku} already exist`);
-            //       }
-            //     console.log(response)
-            //   })
+        // else {
+        //     // const instance = axios.create();
 
-            fetch('https://divinennodim.000webhostapp.com/add.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(productAttributes),
-            })
-                .then((response) => response.json())
-                .then((productAttributes) => {
-                    console.log('Success:', productAttributes);
-                })
-                .catch((error) => {
-                    console.error('Error:', error);
-                });
+        //     // instance.defaults.headers.post['Content-Type'] = 'application/json';
+
+        //     // instance.post('https://divinennodim.000webhostapp.com/add.php', {
+        //     //    productAttributes
+        //     //   }).then(function (response) {
+        //     //     if (response.status === 204) {
+        //     //         alert(`sku ${productAttributes.product_sku} already exist`);
+        //     //       }
+        //     //     console.log(response)
+        //     //   })
+
+        //     // fetch('https://divinennodim.000webhostapp.com/add.php', {
+        //     //     method: 'POST',
+        //     //     headers: {
+        //     //         'Content-Type': 'application/json'
+        //     //     },
+        //     //     body: JSON.stringify(productAttributes),
+        //     // })
+        //     //     .then((response) => response.json())
+        //     //     .then((productAttributes) => {
+        //     //         console.log('Success:', productAttributes);
+        //     //     })
+        //     //     .catch((error) => {
+        //     //         console.error('Error:', error);
+        //     //     });
 
 
 
-        }
+        // }
     }
 
     return (
@@ -184,7 +210,7 @@ export default function AddProduct() {
                             <input type="text" name="product_name" id="name" placeholder='Enter Product Name' value={productAttributes.product_name} onChange={handleChange} />
                         </div>
                         <div>
-                            <label htmlFor="product_price">Price</label>
+                            <label htmlFor="product_price">Price ($)</label>
                             <input type="text" name="product_price" id="price" placeholder='Enter Product Price' value={productAttributes.product_price} onChange={handleChange} />
                         </div>
                     </div>
