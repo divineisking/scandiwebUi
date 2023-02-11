@@ -125,23 +125,19 @@ export default function AddProduct() {
     //handleSubmit
     function handleSave() {
 
-        // assignData()
+        if (productAttributes.product_sku === "") {
+            alert('product sku cant be empty')
+        }
 
-        console.log(productAttributes)
+        else if (productAttributes.product_name === "") {
+            alert('product name cant be empty')
+        }
 
-        // if (productAttributes.product_sku === "") {
-        //     alert('product sku cant be empty')
-        // }
+        else if (productAttributes.product_price === "") {
+            alert('product price cant be empty')
+        }
 
-        // else if (productAttributes.product_name === "") {
-        //     alert('product name cant be empty')
-        // }
-
-        // else if (productAttributes.product_price === "") {
-        //     alert('product price cant be empty')
-        // }
-
-        // else {
+        else {
         //     // const instance = axios.create();
 
         //     // instance.defaults.headers.post['Content-Type'] = 'application/json';
@@ -155,24 +151,24 @@ export default function AddProduct() {
         //     //     console.log(response)
         //     //   })
 
-        //     // fetch('https://divinennodim.000webhostapp.com/add.php', {
-        //     //     method: 'POST',
-        //     //     headers: {
-        //     //         'Content-Type': 'application/json'
-        //     //     },
-        //     //     body: JSON.stringify(productAttributes),
-        //     // })
-        //     //     .then((response) => response.json())
-        //     //     .then((productAttributes) => {
-        //     //         console.log('Success:', productAttributes);
-        //     //     })
-        //     //     .catch((error) => {
-        //     //         console.error('Error:', error);
-        //     //     });
+            fetch('https://divinennodim.000webhostapp.com/add.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(productAttributes),
+            })
+                .then((response) => response.json())
+                .then((productAttributes) => {
+                    console.log('Success:', productAttributes);
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
 
 
 
-        // }
+        }
     }
 
     return (

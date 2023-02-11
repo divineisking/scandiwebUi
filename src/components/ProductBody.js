@@ -1,6 +1,6 @@
 import React, { useState} from 'react';
 import { Link } from 'react-router-dom'
-import axios from 'axios';
+//import axios from 'axios';
 import './productcard.css'
 import ProductCard from './ProductCard'
 import './header.css'
@@ -34,7 +34,7 @@ export default function ProductBody({ products }) {
         //     console.log(error);
         //   });
 
-        fetch('https://divinennodim.000webhostapp.com/add.php', {
+        fetch('https://divinennodim.000webhostapp.com/delete.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -49,7 +49,7 @@ export default function ProductBody({ products }) {
                     console.error('Error:', error);
                 });
 
-          //window.location.reload(false);
+          window.location.reload(false);
 
 
     }
