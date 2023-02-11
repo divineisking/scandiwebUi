@@ -25,14 +25,29 @@ export default function ProductBody({ products }) {
 
     function handleMassDel() {
 
-        axios.post('https://divinennodim.000webhostapp.com/delete.php', {
-            iD
-          }).then(function (response) {
-            console.log(response);
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
+        // axios.post('https://divinennodim.000webhostapp.com/delete.php', {
+        //     iD
+        //   }).then(function (response) {
+        //     console.log(response);
+        //   })
+        //   .catch(function (error) {
+        //     console.log(error);
+        //   });
+
+        fetch('https://divinennodim.000webhostapp.com/add.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(iD),
+            })
+                .then((response) => response.json())
+                .then((iD) => {
+                    console.log('Success:', iD);
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
 
           //window.location.reload(false);
 
