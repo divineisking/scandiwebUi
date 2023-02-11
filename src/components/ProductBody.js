@@ -49,7 +49,7 @@ export default function ProductBody({ products }) {
                     console.error('Error:', error);
                 });
 
-          window.location.reload(false);
+          //window.location.reload(false);
 
 
     }
