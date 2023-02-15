@@ -34,7 +34,7 @@ export default function ProductBody({ products }) {
         //     console.log(error);
         //   });
 
-        fetch('https://divinennodim.000webhostapp.com/delete.php', {
+        fetch('http://localhost/SCANDIWEB_PHPTEST/delete.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
