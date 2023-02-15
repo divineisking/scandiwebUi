@@ -41,7 +41,6 @@ export default function ProductBody({ products }) {
                 },
                 body: JSON.stringify(iD),
             })
-                .then((response) => response.json())
                 .then((iD) => {
                     console.log('Success:', iD);
                 })
