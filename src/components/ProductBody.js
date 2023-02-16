@@ -23,24 +23,17 @@ export default function ProductBody({ products }) {
 
 
 
+
     function handleMassDel() {
 
-        // axios.post('https://divinennodim.000webhostapp.com/delete.php', {
-        //     iD
-        //   }).then(function (response) {
-        //     console.log(response);
-        //   })
-        //   .catch(function (error) {
-        //     console.log(error);
-        //   });
-
-        fetch('http://localhost/SCANDIWEB_PHPTEST/delete.php', {
+        fetch('https://divinennodim.000webhostapp.com/delete.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(iD),
             })
+                .then((response) => console.log(response))
                 .then((iD) => {
                     console.log('Success:', iD);
                 })
