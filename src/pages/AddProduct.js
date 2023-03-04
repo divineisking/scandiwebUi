@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer'
 import '../components/addProduct.css'
+import axios from 'axios';
 //import axios from 'axios';
 
 export default function AddProduct() {
@@ -25,6 +26,7 @@ export default function AddProduct() {
         lengthi: ""
     })
 
+    //handleChange()- handles change for productAttributes
     const handleChange = (e) => {
         const name = e.target.name;
         const value = e.target.value;
@@ -36,6 +38,7 @@ export default function AddProduct() {
         });
     };
 
+    //handleChange2()- handles change for specialAttributes{}
     const handleChange2 = (e) => {
         const name = e.target.name;
         const value = e.target.value;
@@ -47,13 +50,14 @@ export default function AddProduct() {
         });
     };
 
+    //dynamicForm()- renders a new form based on type option picked by user
     const dynamicForm = () => {
         if (type === "DVD") {
             setNewForm(
                 <React.Fragment>
                     <label>Size (MB)</label>
                     <input type='number' placeholder="Size" name="size" value=
-                    {specialAtt.size} id='size' onChange={handleChange2}/>
+                        {specialAtt.size} id='size' onChange={handleChange2} />
                     <br />
                     <q><small>Please Provide Size in MB E.G (600MB)</small></q>
                 </React.Fragment>
@@ -67,7 +71,7 @@ export default function AddProduct() {
                 <React.Fragment>
                     <label>Weight (KG)</label>
                     <input type='number' placeholder="Weight" name="weight" value=
-                    {specialAtt.weight} id='weight' onChange={handleChange2}/>
+                        {specialAtt.weight} id='weight' onChange={handleChange2} />
                     <br />
                     <q><small>Please Provide Weight in KG E.G (60KG)</small></q>
                 </React.Fragment>
@@ -79,18 +83,18 @@ export default function AddProduct() {
 
                 <React.Fragment>
                     <label>Height (CM)</label>
-                    <input type='number' placeholder='Height' name="height" value={specialAtt.height} id='height' onChange={handleChange2}/>
-                    <br/>
+                    <input type='number' placeholder='Height' name="height" value={specialAtt.height} id='height' onChange={handleChange2} />
+                    <br />
                     <q><small>Please Provide Height in CM E.G (60CM)</small></q>
-                    <br/>
+                    <br />
                     <label>Width (CM)</label>
-                    <input type='number' placeholder='Width' name="width" value={specialAtt.width} id='width' onChange={handleChange2}/>
-                    <br/>
+                    <input type='number' placeholder='Width' name="width" value={specialAtt.width} id='width' onChange={handleChange2} />
+                    <br />
                     <q><small>Please Provide Width in CM E.G (60CM)</small></q>
-                    <br/>
+                    <br />
                     <label>length (CM)</label>
-                    <input type='number' placeholder='Length' name="lengthi" value={specialAtt.lengthi} id='length' onChange={handleChange2}/>
-                    <br/>
+                    <input type='number' placeholder='Length' name="lengthi" value={specialAtt.lengthi} id='length' onChange={handleChange2} />
+                    <br />
                     <q><small>Please Provide length in CM E.G (60CM)</small></q>
                 </React.Fragment>
 
@@ -98,19 +102,20 @@ export default function AddProduct() {
         }
     };
 
+    //assignData()- takes data from specialAtrribute{} and assigns to ProductAttributes.product_attribute
     const assignData = () => {
-          if (type === 'DVD'){
+        if (type === 'DVD') {
             let data = specialAtt.size
-            productAttributes.product_attribute = data+'MB'
-           }
-           if (type === 'Book'){
+            productAttributes.product_attribute = data + 'MB'
+        }
+        if (type === 'Book') {
             let data = specialAtt.weight
-            productAttributes.product_attribute = data+'KG'
-           }
-           if (type === 'Furniture'){
-            let data = specialAtt.height+'x'+specialAtt.lengthi+'x'+specialAtt.width
-            productAttributes.product_attribute = data+'CM'
-           }
+            productAttributes.product_attribute = data + 'KG'
+        }
+        if (type === 'Furniture') {
+            let data = specialAtt.height + 'x' + specialAtt.lengthi + 'x' + specialAtt.width
+            productAttributes.product_attribute = data + 'CM'
+        }
 
     }
 
@@ -122,46 +127,57 @@ export default function AddProduct() {
         // eslint-disable-next-line
     }, [type, specialAtt]);
 
-    //handleSubmit
+    //handleSave()- sends data to BE if all checks are met
     function handleSave() {
 
         if (productAttributes.product_sku === "") {
-            alert('product sku cant be empty')
+            alert('Enter all values')
         }
 
         else if (productAttributes.product_name === "") {
-            alert('product name cant be empty')
+            alert('Enter all values')
         }
 
         else if (productAttributes.product_price === "") {
-            alert('product price cant be empty')
+            alert('Enter all values')
+        }
+
+        else if (type === 'DVD' && specialAtt.size === '') {
+            alert('Enter all values')
+        }
+
+        else if (type === 'Book' && specialAtt.weight === '') {
+            alert('Enter all values')
+        }
+
+        else if (type === 'Furniture' && specialAtt.height === '') {
+            alert('Enter all values')
+        }
+
+        else if (type === 'Furniture' && specialAtt.width === '') {
+            alert('Enter all values')
+        }
+
+        else if (type === 'Furniture' && specialAtt.lengthi === '') {
+            alert('Enter all values')
         }
 
         else {
-        //     // const instance = axios.create();
 
-        //     // instance.defaults.headers.post['Content-Type'] = 'application/json';
+            // console.log(productAttributes)
 
-        //     // instance.post('https://divinennodim.000webhostapp.com/add.php', {
-        //     //    productAttributes
-        //     //   }).then(function (response) {
-        //     //     if (response.status === 204) {
-        //     //         alert(`sku ${productAttributes.product_sku} already exist`);
-        //     //       }
-        //     //     console.log(response)
-        //     //   })
-
-            fetch('https://divinennodim.000webhostapp.com/add.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(productAttributes),
-            })
-                .then((response) => response.json())
-                .then((productAttributes) => {
-                    console.log('Success:', productAttributes);
+            axios.post('/add.php', {
+                productAttributes
+              })
+                .then(function (response) {
+                    if (response.status === 204) {
+                        alert(`sku ${productAttributes.product_sku} already exist`);
+                    }
+                    console.log(response)
                 })
+                // .then((productAttributes) => {
+                //     console.log('Success:', productAttributes);
+                // })
                 .catch((error) => {
                     console.error('Error:', error);
                 });
@@ -213,7 +229,7 @@ export default function AddProduct() {
                     <div className='specialAtt'>
                         <label htmlFor='productType'>Type Switcher</label>
                         <select id='productType' name='productType' onChange={(e) => setType(e.target.value)}
-                            >
+                        >
 
                             {/* <option value="switch type">switch type</option> */}
                             <option id='DVD' value='DVD'>
@@ -230,7 +246,7 @@ export default function AddProduct() {
                     </div>
 
                     {/* dynamically rendered form */}
-                        {newForm}
+                    {newForm}
                 </form>
             </section>
             <Footer />

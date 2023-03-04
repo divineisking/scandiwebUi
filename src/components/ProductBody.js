@@ -1,6 +1,6 @@
 import React, { useState} from 'react';
 import { Link } from 'react-router-dom'
-//import axios from 'axios';
+import axios from 'axios';
 import './productcard.css'
 import ProductCard from './ProductCard'
 import './header.css'
@@ -9,6 +9,7 @@ export default function ProductBody({ products }) {
 
     const [iD, setId] = useState([])
 
+    //if product is checked add product id to iD[]
    function getProdID(prodID) {
         setId((prevId) => {
             return (
@@ -17,22 +18,28 @@ export default function ProductBody({ products }) {
         })
     }
 
+    //if product is unchecked and removes product id from iD[]
     function rmProdID(prodID){
         iD.pop(prodID)
     }
 
 
 
-
+    //sends iD[] to BE
     function handleMassDel() {
 
-        fetch('https://divinennodim.000webhostapp.com/delete.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(iD),
-            })
+        console.log(iD);
+
+        // fetch('/delete.php', {
+        //         method: 'POST',
+        //         headers: {
+        //             'Content-Type': 'application/json'
+        //         },
+        //         body: JSON.stringify(18),
+        //     })
+            axios.post('/delete.php', {
+                iD
+              })
                 .then((response) => console.log(response))
                 .then((iD) => {
                     console.log('Success:', iD);
@@ -41,7 +48,7 @@ export default function ProductBody({ products }) {
                     console.error('Error:', error);
                 });
 
-          //window.location.reload(false);
+          window.location.reload(false);
 
 
     }

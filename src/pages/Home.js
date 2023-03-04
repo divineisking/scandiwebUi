@@ -8,6 +8,7 @@ function Home(){
     //fetch data from BE
     const fetchProducts = async () => {
         const response = await fetch('https://divinennodim.000webhostapp.com/view.php');
+        console.log(response)
         const data = await response.json();
         const results = data.map(myData=>{
             return {...myData, isHeld: false }
