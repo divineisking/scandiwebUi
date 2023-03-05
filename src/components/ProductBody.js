@@ -38,7 +38,7 @@ export default function ProductBody({ products }) {
         //         },
         //         body: JSON.stringify(18),
         //     })
-            axios.post('/delete.php', {
+            axios.post(REACT_APP_BASE_URL + '/delete.php', {
                 iD
               })
                 .then((response) => console.log(response))
