@@ -28,7 +28,8 @@ export default function ProductBody({ products }) {
     //sends iD[] to BE
     function handleMassDel() {
 
-        console.log(iD);
+        console.log(process.env.REACT_APP_BASE_URL);
+        const {REACT_APP_BASE_URL} = process.env;
 
         // fetch('/delete.php', {
         //         method: 'POST',
