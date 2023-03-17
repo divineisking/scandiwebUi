@@ -17,8 +17,12 @@
 .delete-checkbox{
     margin-left: 5px;
     margin-top: 5px;
+    padding-bottom: 5px;
+    padding-top: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
     width: 15px;
-    height: 15px;
+    height: 10px;
     border: solid #000 1px ;
     text-align: center;
 }

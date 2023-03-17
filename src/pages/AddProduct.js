@@ -195,7 +195,7 @@ export default function AddProduct() {
                 </div>
                 <div className='buttons'>
                     <div>
-                        <button type='submit' name='submit' onClick={() => { handleSave(productAttributes) }}>
+                        <button type='submit' name='submit' onClick={handleSave}>
                             Save
                         </button>
                     </div>

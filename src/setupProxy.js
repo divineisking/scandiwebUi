@@ -4,14 +4,14 @@ module.exports = function(app) {
   app.use(
     '/add.php',
     createProxyMiddleware({
-      target: 'https://divinennodim.000webhostapp.com',
+      target: 'http://localhost/SCANDIWEB_PHPTEST/add.php',
       changeOrigin: true,
     })
   );
   app.use(
     '/delete.php',
     createProxyMiddleware({
-      target: 'https://divinennodim.000webhostapp.com',
+      target: 'http://localhost/SCANDIWEB_PHPTEST/delete.php',
       changeOrigin: true,
     })
   );

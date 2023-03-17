@@ -41,7 +41,7 @@ export default function ProductCard({ isHeld, product_id,
                 <div className='productDetail'>
                     <p>{product_sku}</p>
                     <p>{product_name}</p>
-                    <p>{product_price}.00$</p>
+                    <p>${product_price}.00</p>
                     <p>{product_attributes}</p>
                 </div>
             </div>

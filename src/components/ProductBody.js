@@ -5,7 +5,7 @@ import './productcard.css'
 import ProductCard from './ProductCard'
 import './header.css'
 
-export default function ProductBody({ products }) {
+export default function ProductBody({ products, fetchProducts }) {
 
     const [iD, setId] = useState([])
 
@@ -26,30 +26,25 @@ export default function ProductBody({ products }) {
 
 
     //sends iD[] to BE
-    function handleMassDel() {
+    const handleMassDel = async () =>{
 
-        console.log(process.env.REACT_APP_BASE_URL);
-        const {REACT_APP_BASE_URL} = process.env;
-
-        // fetch('/delete.php', {
-        //         method: 'POST',
-        //         headers: {
-        //             'Content-Type': 'application/json'
-        //         },
-        //         body: JSON.stringify(18),
-        //     })
-            axios.post(REACT_APP_BASE_URL + '/delete.php', {
+            await axios.post('/delete.php', {
                 iD
               })
                 .then((response) => console.log(response))
                 .then((iD) => {
                     console.log('Success:', iD);
-                })
+                }).then(fetchProducts())
                 .catch((error) => {
                     console.error('Error:', error);
                 });
 
-          //window.location.reload(false);
+                //reloads
+                await fetchProducts()
+
+
+
+
 
 
     }
